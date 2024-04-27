@@ -88,3 +88,65 @@ bool cariVertikalDariKanan(const vector<vector<char>>& matriks, const string& ka
   return false;
 }
 
+bool cariDiagonalKananBawah(const vector<vector<char>>& matriks, const string& kata) {
+    int panjang_baris = matriks.size();
+    int panjang_kolom = matriks[0].size();
+
+    for (int i = 0; i <= panjang_baris - kata.length(); ++i) {
+        for (int j = 0; j <= panjang_kolom - kata.length(); ++j) {
+            bool sama = true;
+            for (int k = 0; k < kata.length(); ++k) {
+                if (matriks[i + k][j + k] != kata[k]) {
+                    sama = false;
+                    break;
+                }
+            }
+            if (sama) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool cariDiagonalKananAtas(const vector<vector<char>>& matriks, const string& kata) {
+    int panjang_baris = matriks.size();
+    int panjang_kolom = matriks[0].size();
+
+    for (int i = kata.length() - 1; i < panjang_baris; ++i) {
+        for (int j = kata.length() - 1; j < panjang_kolom; ++j) {
+            bool sama = true;
+            for (int k = 0; k < kata.length(); ++k) {
+                if (i - k < 0 || j - k < 0 || matriks[i - k][j - k] != kata[k]) {
+                    sama = false;
+                    break;
+                }
+            }
+            if (sama) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool cariDiagonalKiriBawah(const vector<vector<char>>& matriks, const string& kata) {
+    int panjang_baris = matriks.size();
+    int panjang_kolom = matriks[0].size();
+
+    for (int i = 0; i <= panjang_baris - kata.length(); ++i) {
+        for (int j = kata.length() - 1; j < panjang_kolom; ++j) {
+            bool sama = true;
+            for (int k = 0; k < kata.length(); ++k) {
+                if (i + k >= panjang_baris || j - k < 0 || matriks[i + k][j - k] != kata[k]) {
+                    sama = false;
+                    break;
+                }
+            }
+            if (sama) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
